@@ -488,6 +488,36 @@ app.post('/api/orders', (req, res) => {
   return res.json({ success: true, orderId });
 });
 
+app.post('/api/order-details/:id/cancel', (req, res) => {
+  const { id } = req.params;
+  const { operatorId, operatorName } = req.body;
+
+  const orderDetails = db.get('order_details');
+  const detailIdx = orderDetails.findIndex(od => od.id === id);
+  if (detailIdx === -1) return res.status(404).json({ error: 'Không tìm thấy chi tiết đơn hàng.' });
+
+  const item = orderDetails[detailIdx];
+  if (item.item_status !== 'Đang chờ') {
+    return res.status(400).json({
+      error: 'Bếp đã tiếp nhận món, khách không thể tự hủy. Vui lòng liên hệ nhân viên để được hỗ trợ xử lý.'
+    });
+  }
+
+  item.item_status = 'Đã hủy';
+  db.save('order_details', orderDetails);
+
+  const orders = db.get('orders');
+  const orderIdx = orders.findIndex(o => o.id === item.order_id);
+  if (orderIdx !== -1) {
+    const activeDetails = orderDetails.filter(od => od.order_id === item.order_id && od.item_status !== 'Đã hủy');
+    orders[orderIdx].total_amount = activeDetails.reduce((sum, od) => sum + od.price_at_time * od.quantity, 0);
+    db.save('orders', orders);
+  }
+
+  logAction(operatorId || 'guest', operatorName || 'Khách hàng', 'Khách hủy món đã gọi', `Khách hủy chi tiết món ${id} trong đơn ${item.order_id} khi món còn ở trạng thái chờ bếp tiếp nhận.`);
+  return res.json({ success: true, item });
+});
+
 app.put('/api/order-details/:id/status', (req, res) => {
   const { id } = req.params;
   const { status, operatorId, operatorName } = req.body;
@@ -498,6 +528,12 @@ app.put('/api/order-details/:id/status', (req, res) => {
 
   const item = orderDetails[detailIdx];
   const oldStatus = item.item_status;
+
+  if (oldStatus === 'Đã hủy') {
+    return res.status(400).json({
+      error: 'Món đã được khách hủy trước khi bếp tiếp nhận, không thể đưa lại vào quy trình chế biến.'
+    });
+  }
 
   // BR10: One-way status progression: Đang chờ -> Đang chế biến -> Đã hoàn thành -> Đã phục vụ
   const statusHierarchy = ['Đang chờ', 'Đang chế biến', 'Đã hoàn thành', 'Đã phục vụ'];
@@ -576,7 +612,8 @@ app.put('/api/order-details/:id/status', (req, res) => {
   // Re-compute parent order aggregate service status
   setTimeout(() => {
     const latestDetails = db.get('order_details');
-    const siblings = latestDetails.filter(od => od.order_id === item.order_id);
+    const siblings = latestDetails.filter(od => od.order_id === item.order_id && od.item_status !== 'Đã hủy');
+    if (siblings.length === 0) return;
     const allServed = siblings.every(od => od.item_status === 'Đã phục vụ');
     const allDone = siblings.every(od => od.item_status === 'Đã hoàn thành' || od.item_status === 'Đã phục vụ');
 

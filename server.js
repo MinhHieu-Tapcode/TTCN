@@ -20351,6 +20351,30 @@ app.post("/api/orders", (req, res) => {
   logAction("guest", "Kh\xE1ch h\xE0ng", "\u0110\u1EB7t m\xF3n \u0103n", `Kh\xE1ch b\xE0n ${tableId} g\u1EEDi \u0111\u01A1n ${orderId} g\u1ED3m ${cartItems.length} m\xF3n. T\u1EA1m t\xEDnh ${totalComputed.toLocaleString()}\u0111`);
   return res.json({ success: true, orderId });
 });
+app.post("/api/order-details/:id/cancel", (req, res) => {
+  const { id } = req.params;
+  const { operatorId, operatorName } = req.body;
+  const orderDetails = db.get("order_details");
+  const detailIdx = orderDetails.findIndex((od) => od.id === id);
+  if (detailIdx === -1) return res.status(404).json({ error: "Kh\xF4ng t\xECm th\u1EA5y chi ti\u1EBFt \u0111\u01A1n h\xE0ng." });
+  const item = orderDetails[detailIdx];
+  if (item.item_status !== "\u0110ang ch\u1EDD") {
+    return res.status(400).json({
+      error: "B\u1EBFp \u0111\xE3 ti\u1EBFp nh\u1EADn m\xF3n, kh\xE1ch kh\xF4ng th\u1EC3 t\u1EF1 h\u1EE7y. Vui l\xF2ng li\xEAn h\u1EC7 nh\xE2n vi\xEAn \u0111\u1EC3 \u0111\u01B0\u1EE3c h\u1ED7 tr\u1EE3 x\u1EED l\xFD."
+    });
+  }
+  item.item_status = "\u0110\xE3 h\u1EE7y";
+  db.save("order_details", orderDetails);
+  const orders = db.get("orders");
+  const orderIdx = orders.findIndex((o) => o.id === item.order_id);
+  if (orderIdx !== -1) {
+    const activeDetails = orderDetails.filter((od) => od.order_id === item.order_id && od.item_status !== "\u0110\xE3 h\u1EE7y");
+    orders[orderIdx].total_amount = activeDetails.reduce((sum, od) => sum + od.price_at_time * od.quantity, 0);
+    db.save("orders", orders);
+  }
+  logAction(operatorId || "guest", operatorName || "Kh\xE1ch h\xE0ng", "Kh\xE1ch h\u1EE7y m\xF3n \u0111\xE3 g\u1ECDi", `Kh\xE1ch h\u1EE7y chi ti\u1EBFt m\xF3n ${id} trong \u0111\u01A1n ${item.order_id} khi m\xF3n c\xF2n \u1EDF tr\u1EA1ng th\xE1i ch\u1EDD b\u1EBFp ti\u1EBFp nh\u1EADn.`);
+  return res.json({ success: true, item });
+});
 app.put("/api/order-details/:id/status", (req, res) => {
   const { id } = req.params;
   const { status, operatorId, operatorName } = req.body;
@@ -20359,6 +20383,11 @@ app.put("/api/order-details/:id/status", (req, res) => {
   if (detailIdx === -1) return res.status(404).json({ error: "Kh\xF4ng t\xECm th\u1EA5y chi ti\u1EBFt \u0111\u01A1n h\xE0ng." });
   const item = orderDetails[detailIdx];
   const oldStatus = item.item_status;
+  if (oldStatus === "\u0110\xE3 h\u1EE7y") {
+    return res.status(400).json({
+      error: "M\xF3n \u0111\xE3 \u0111\u01B0\u1EE3c kh\xE1ch h\u1EE7y tr\u01B0\u1EDBc khi b\u1EBFp ti\u1EBFp nh\u1EADn, kh\xF4ng th\u1EC3 \u0111\u01B0a l\u1EA1i v\xE0o quy tr\xECnh ch\u1EBF bi\u1EBFn."
+    });
+  }
   const statusHierarchy = ["\u0110ang ch\u1EDD", "\u0110ang ch\u1EBF bi\u1EBFn", "\u0110\xE3 ho\xE0n th\xE0nh", "\u0110\xE3 ph\u1EE5c v\u1EE5"];
   const currentIndex = statusHierarchy.indexOf(oldStatus);
   const nextIndex = statusHierarchy.indexOf(status);
@@ -20418,7 +20447,8 @@ app.put("/api/order-details/:id/status", (req, res) => {
   db.save("order_details", orderDetails);
   setTimeout(() => {
     const latestDetails = db.get("order_details");
-    const siblings = latestDetails.filter((od) => od.order_id === item.order_id);
+    const siblings = latestDetails.filter((od) => od.order_id === item.order_id && od.item_status !== "\u0110\xE3 h\u1EE7y");
+    if (siblings.length === 0) return;
     const allServed = siblings.every((od) => od.item_status === "\u0110\xE3 ph\u1EE5c v\u1EE5");
     const allDone = siblings.every((od) => od.item_status === "\u0110\xE3 ho\xE0n th\xE0nh" || od.item_status === "\u0110\xE3 ph\u1EE5c v\u1EE5");
     const orders = db.get("orders");

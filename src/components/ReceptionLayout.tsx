@@ -370,7 +370,7 @@ export default function ReceptionLayout() {
     const sessionOrders = orders.filter(o => o.Ma_phien === session.Ma_phien);
     let cost = 0;
     sessionOrders.forEach(ord => {
-      const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon);
+      const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon && od.Trang_thai_mon !== OrderItemStatus.DA_HUY);
       details.forEach(det => {
         cost += det.Don_gia_tai_thoi_diem * det.So_luong;
       });
@@ -594,7 +594,7 @@ export default function ReceptionLayout() {
   if (activeSessionOfModalTable) {
     const sessionOrders = orders.filter(o => o.Ma_phien === activeSessionOfModalTable.Ma_phien);
     sessionOrders.forEach(ord => {
-      const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon);
+      const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon && od.Trang_thai_mon !== OrderItemStatus.DA_HUY);
       details.forEach(det => {
         const dName = dishes.find(d => d.Ma_mon === det.Ma_mon)?.Ten_mon || 'Đặc Sản Nấu Lẩu';
         const cost = det.Don_gia_tai_thoi_diem * det.So_luong;
@@ -993,7 +993,7 @@ export default function ReceptionLayout() {
                     let cost = 0;
                     const sessionOrders = orders.filter(o => o.Ma_phien === sess.Ma_phien);
                     sessionOrders.forEach(ord => {
-                      const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon);
+                      const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon && od.Trang_thai_mon !== OrderItemStatus.DA_HUY);
                       details.forEach(det => {
                         cost += det.Don_gia_tai_thoi_diem * det.So_luong;
                       });
@@ -1071,7 +1071,7 @@ export default function ReceptionLayout() {
                   let list: { name: string; qty: number; total: number }[] = [];
                   const sessionOrders = orders.filter(o => o.Ma_phien === selectedHistorySession);
                   sessionOrders.forEach(ord => {
-                    const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon);
+                    const details = orderDetails.filter(od => od.Ma_hd_dat_mon === ord.Ma_hd_dat_mon && od.Trang_thai_mon !== OrderItemStatus.DA_HUY);
                     details.forEach(det => {
                       const dName = dishes.find(d => d.Ma_mon === det.Ma_mon)?.Ten_mon || 'Đặc Sản Nấu Lẩu';
                       const itemCost = det.Don_gia_tai_thoi_diem * det.So_luong;
