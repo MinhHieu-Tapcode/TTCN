@@ -363,12 +363,14 @@ export function TableCard({
   simStatus, 
   booking, 
   session, 
+  muted = false,
   onClick 
 }: { 
   table: any; 
   simStatus: string; 
   booking?: any; 
   session?: any; 
+  muted?: boolean;
   onClick: () => void;
 }) {
   let cardStyle = '';
@@ -400,11 +402,19 @@ export function TableCard({
 
   // Calculate bill total if active
   const orderTotal = session && session.orderTotal ? session.orderTotal : 0;
+  const sessionCustomerName = session?.customer_name?.trim() || 'Khách vãng lai';
+  const maskPhoneNumber = (phone?: string) => {
+    if (!phone) return '****';
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length <= 4) return digits.padStart(4, '*');
+    return `${'*'.repeat(Math.max(4, digits.length - 4))}${digits.slice(-4)}`;
+  };
 
   return (
     <button
       onClick={onClick}
-      className={`w-full p-4 rounded-2xl border-2 text-left h-36 flex flex-col justify-between transition-all duration-200 hover:shadow-lg cursor-pointer select-none relative ${cardStyle}`}
+      aria-disabled={muted}
+      className={`w-full p-4 rounded-2xl border-2 text-left h-36 flex flex-col justify-between transition-all duration-200 ${muted ? 'opacity-40 pointer-events-none filter grayscale' : 'hover:shadow-lg cursor-pointer'} select-none relative ${cardStyle}`}
       id={`table-trigger-${table.Ma_ban}`}
     >
       <div className="flex justify-between items-start w-full">
@@ -428,12 +438,13 @@ export function TableCard({
         {booking ? (
           <div>
             <p className="font-bold truncate">Khách: {booking.Ten_khach_hang}</p>
-            <p className="font-mono text-[9px] opacity-75">{booking.So_dien_thoai}</p>
+            <p className="font-mono text-[9px] opacity-75">{maskPhoneNumber(booking.So_dien_thoai)}</p>
           </div>
         ) : session ? (
           <div className="space-y-1">
+            <p className="font-bold truncate">Khách: {sessionCustomerName}</p>
             <div className="flex justify-between font-bold">
-              <span>Khách: {session.So_khach || 4} người</span>
+              <span>{session.So_khach || 4} người</span>
               <span>Vào: {new Date(session.Thoi_gian_bat_dau).toLocaleTimeString('vi-VN', {hour: '2-digit', minute:'2-digit'})}</span>
             </div>
             <div className="flex justify-between items-center text-[10px] mt-0.5">
@@ -442,7 +453,7 @@ export function TableCard({
             </div>
           </div>
         ) : (
-          <p className="font-sans italic opacity-75 font-semibold">Bàn lẩu khả dụng</p>
+          <div className="min-h-5" aria-hidden="true"></div>
         )}
       </div>
 

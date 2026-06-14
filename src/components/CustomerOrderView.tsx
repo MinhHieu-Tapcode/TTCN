@@ -6,7 +6,7 @@
 import React, { useState, useEffect } from 'react';
 import { useRestaurantStore } from '../data/store';
 import { DishStatus, OrderItemStatus } from '../types';
-import { Phone, Users, Plus, Minus, ShoppingCart, Check, Clock, ChevronRight, ArrowLeft, Send, Heart, BookOpen, Trash2 } from 'lucide-react';
+import { Phone, Users, Plus, Minus, ShoppingCart, Check, Clock, ChevronRight, ArrowLeft, Send, Heart, BookOpen, Trash2, Search, X, Home } from 'lucide-react';
 
 // Circular Official Brand Logo matching the uploaded image perfectly
 const BrandLogo = ({ size = 120 }: { size?: number }) => {

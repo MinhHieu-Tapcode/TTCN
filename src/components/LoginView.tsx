@@ -5,13 +5,14 @@
 
 import React, { useState } from 'react';
 import { useRestaurantStore } from '../data/store';
-import { LogIn, ShieldAlert, CheckCircle } from 'lucide-react';
+import { LogIn, ShieldAlert, CheckCircle, Eye, EyeOff } from 'lucide-react';
 import GiaKhanhLogo from './GiaKhanhLogo';
 
 export default function LoginView() {
   const { login, employees, setCurrentRole } = useRestaurantStore();
   const [username, setUsername] = useState('admin');
   const [password, setPassword] = useState('123456');
+  const [showPassword, setShowPassword] = useState(false);
   const [errorMsg, setErrorMsg] = useState('');
   const [successMsg, setSuccessMsg] = useState('');
 
@@ -101,14 +102,24 @@ export default function LoginView() {
 
             <div>
               <label className="block text-xs font-semibold uppercase tracking-wider text-gray-500 mb-2">Mật khẩu</label>
-              <input
-                id="password-inp"
-                type="password"
-                className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 transition bg-gray-50 focus:bg-white"
-                placeholder="Nhập mật khẩu"
-                value={password}
-                onChange={e => setPassword(e.target.value)}
-              />
+              <div className="relative">
+                <input
+                  id="password-inp"
+                  type={showPassword ? 'text' : 'password'}
+                  className="w-full px-4 py-3 rounded-xl border border-gray-200 text-sm text-gray-800 transition bg-gray-50 focus:bg-white"
+                  placeholder="Nhập mật khẩu"
+                  value={password}
+                  onChange={e => setPassword(e.target.value)}
+                />
+                <button
+                  type="button"
+                  aria-label={showPassword ? 'Ẩn mật khẩu' : 'Hiện mật khẩu'}
+                  onClick={() => setShowPassword(s => !s)}
+                  className="absolute right-3 top-1/2 -translate-y-1/2 text-gray-500 hover:text-gray-700"
+                >
+                  {showPassword ? <EyeOff size={16} /> : <Eye size={16} />}
+                </button>
+              </div>
             </div>
 
             <div className="flex items-center justify-between text-xs pt-1">

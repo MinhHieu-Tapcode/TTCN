@@ -82,6 +82,13 @@ export default function WaiterDashboard() {
     return `${hrs.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
   };
 
+  const maskPhoneNumber = (phone?: string) => {
+    if (!phone) return '****';
+    const digits = phone.replace(/\D/g, '');
+    if (digits.length <= 4) return digits.padStart(4, '*');
+    return `${'*'.repeat(Math.max(4, digits.length - 4))}${digits.slice(-4)}`;
+  };
+
   // Mapped physical layout tables filtered by floor
   const currentFloorTables = tables.filter(t => t.Tang === activeFloor);
 
@@ -147,7 +154,7 @@ export default function WaiterDashboard() {
           {booking ? (
             <div className="truncate text-[10px] leading-relaxed">
               <p className="font-black truncate">Khách: {booking.Ten_khach_hang}</p>
-              <p className="font-mono text-[9px] opacity-80">{booking.So_dien_thoai}</p>
+              <p className="font-mono text-[9px] opacity-80">{maskPhoneNumber(booking.So_dien_thoai)}</p>
             </div>
           ) : session ? (
             <div className="text-[10px] leading-relaxed truncate">
@@ -155,7 +162,7 @@ export default function WaiterDashboard() {
               <p className="font-mono text-[9px] opacity-80">{session.Ma_phien_code}</p>
             </div>
           ) : (
-            <p className="text-[10px] font-sans italic opacity-75 font-semibold">Bàn lẩu khả dụng</p>
+            <div className="min-h-5" aria-hidden="true"></div>
           )}
         </div>
 

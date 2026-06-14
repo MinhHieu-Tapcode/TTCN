@@ -19702,11 +19702,10 @@ var defaultDbState = {
     { id: "kh003", phone: "0971234567" }
   ],
   categories: [
-    { id: "dm01", name: "L\u1EA9u", sort_order: 1, status: "Hi\u1EC3n th\u1ECB" },
-    { id: "dm02", name: "Topping", sort_order: 2, status: "Hi\u1EC3n th\u1ECB" },
-    { id: "dm03", name: "\u0110\u1ED3 u\u1ED1ng", sort_order: 3, status: "Hi\u1EC3n th\u1ECB" },
-    { id: "dm04", name: "Tr\xE1ng mi\u1EC7ng", sort_order: 4, status: "Hi\u1EC3n th\u1ECB" },
-    { id: "dm05", name: "Kh\xE1c", sort_order: 5, status: "Hi\u1EC3n th\u1ECB" }
+    { id: "dm05", name: "\u0110\u1ED3 khai v\u1ECB", sort_order: 1, status: "Hi\u1EC3n th\u1ECB" },
+    { id: "dm01", name: "L\u1EA9u", sort_order: 2, status: "Hi\u1EC3n th\u1ECB" },
+    { id: "dm02", name: "\u0110\u1ED3 nh\xFAng l\u1EA9u", sort_order: 3, status: "Hi\u1EC3n th\u1ECB" },
+    { id: "dm03", name: "\u0110\u1ED3 u\u1ED1ng", sort_order: 4, status: "Hi\u1EC3n th\u1ECB" }
   ],
   dishes: [
     { id: "m01", category_id: "dm01", name: "L\u1EA9u N\u1EA5m Th\u1EADp C\u1EA9m", price: 299e3, description: "L\u1EA9u n\u1EA5m th\u1EADp c\u1EA9m v\u1EDBi nhi\u1EC1u lo\u1EA1i n\u1EA5m t\u01B0\u01A1i ngon, n\u01B0\u1EDBc d\xF9ng thanh ng\u1ECDt.", image_url: "https://images.unsplash.com/photo-1547928500-4722f55cc829?w=600&auto=format&fit=crop&q=60", status: "C\xF2n ph\u1EE5c v\u1EE5" },
@@ -19829,6 +19828,14 @@ var Database = class {
       } catch (e) {
         try {
           await this.pool.query("ALTER TABLE `table_sessions` ADD COLUMN `customer_phone` VARCHAR(20) DEFAULT NULL");
+        } catch (_) {
+        }
+      }
+      try {
+        await this.pool.query("ALTER TABLE `table_sessions` ADD COLUMN IF NOT EXISTS `customer_name` VARCHAR(255) DEFAULT 'Kh\xE1ch v\xE3ng lai'");
+      } catch (e) {
+        try {
+          await this.pool.query("ALTER TABLE `table_sessions` ADD COLUMN `customer_name` VARCHAR(255) DEFAULT 'Kh\xE1ch v\xE3ng lai'");
         } catch (_) {
         }
       }
@@ -20103,7 +20110,7 @@ app.get("/api/sessions", (req, res) => {
   return res.json(db.get("table_sessions"));
 });
 app.post(["/api/sessions", "/api/sessions/start"], (req, res) => {
-  const { tableId, phone, guestsCount, existingCode, createdBy } = req.body;
+  const { tableId, phone, guestsCount, existingCode, createdBy, customerName } = req.body;
   if (!tableId || !phone) {
     return res.status(400).json({ error: "Thi\u1EBFu th\xF4ng tin s\u1ED1 b\xE0n ho\u1EB7c s\u1ED1 \u0111i\u1EC7n tho\u1EA1i." });
   }
@@ -20125,6 +20132,7 @@ app.post(["/api/sessions", "/api/sessions/start"], (req, res) => {
   }
   const generatedCode = existingCode || Math.random().toString(36).substring(2, 6).toUpperCase();
   const sessionId = `s_${tableId}_${Date.now().toString().slice(-4)}`;
+  const displayCustomerName = customerName && customerName.trim() ? customerName.trim() : "Kh\xE1ch v\xE3ng lai";
   const newSession = {
     id: sessionId,
     table_id: tableId,
@@ -20135,6 +20143,7 @@ app.post(["/api/sessions", "/api/sessions/start"], (req, res) => {
     share_code: generatedCode,
     status: "active",
     guests_count: guestsCount ? Number(guestsCount) : 4,
+    customer_name: displayCustomerName,
     created_by: createdBy || null
   };
   db.save("table_sessions", [newSession, ...sessions]);
@@ -20148,7 +20157,7 @@ app.post(["/api/sessions", "/api/sessions/start"], (req, res) => {
     createdBy || "guest",
     createdBy ? "Nh\xE2n vi\xEAn l\u1EC5 t\xE2n" : "Kh\xE1ch h\xE0ng",
     "M\u1EDF phi\xEAn \u0111\u1EB7t b\xE0n",
-    `K\xEDch ho\u1EA1t b\xE0n ${tableId} c\xF9ng S\u0110T ${trimmedPhone} - Kh\xE1ch ng\u1ED3i: ${newSession.guests_count} - M\xE3: ${generatedCode}`
+    `K\xEDch ho\u1EA1t b\xE0n ${tableId} cho ${displayCustomerName} c\xF9ng S\u0110T ${trimmedPhone} - Kh\xE1ch ng\u1ED3i: ${newSession.guests_count} - M\xE3: ${generatedCode}`
   );
   return res.json({ success: true, shareCode: generatedCode, sessionId });
 });

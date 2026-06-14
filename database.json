@@ -409,6 +409,22 @@
     {
       "id": "cust_1781449854968",
       "phone": "0986154978"
+    },
+    {
+      "id": "cust_1781454469581",
+      "phone": "0986154977"
+    },
+    {
+      "id": "cust_1781455670165",
+      "phone": "0986154976"
+    },
+    {
+      "id": "cust_1781456739180",
+      "phone": "0977665544"
+    },
+    {
+      "id": "cust_1781464066291",
+      "phone": "0123456789"
     }
   ],
   "categories": [
@@ -2178,14 +2194,110 @@
   ],
   "table_sessions": [
     {
+      "id": "s_B03_0741",
+      "table_id": "B03",
+      "customer_id": "cust_1781455670165",
+      "customer_phone": "0986154976",
+      "start_time": "2026-06-14T20:12:20.742Z",
+      "end_time": null,
+      "share_code": "PSKN",
+      "status": "active",
+      "guests_count": 2,
+      "created_by": "mv002"
+    },
+    {
+      "id": "s_B02_6303",
+      "table_id": "B02",
+      "customer_id": "cust_1781464066291",
+      "customer_phone": "0123456789",
+      "start_time": "2026-06-14T19:07:46.303Z",
+      "end_time": "2026-06-14T19:53:05.394Z",
+      "share_code": "JOHW",
+      "status": "completed",
+      "guests_count": 2,
+      "created_by": "mv002"
+    },
+    {
+      "id": "s_B02_6425",
+      "table_id": "B02",
+      "customer_id": "cust_1781454469581",
+      "customer_phone": "0986154977",
+      "start_time": "2026-06-14T19:03:06.425Z",
+      "end_time": "2026-06-14T19:07:13.265Z",
+      "share_code": "H08P",
+      "status": "completed",
+      "guests_count": 2,
+      "created_by": "mv002"
+    },
+    {
+      "id": "s_B03_3197",
+      "table_id": "B03",
+      "customer_id": "cust_1781455670165",
+      "customer_phone": "0986154976",
+      "start_time": "2026-06-14T18:08:23.197Z",
+      "end_time": "2026-06-14T18:08:32.211Z",
+      "share_code": "3MEM",
+      "status": "completed",
+      "guests_count": 6,
+      "created_by": "mv002"
+    },
+    {
+      "id": "s_B01_9192",
+      "table_id": "B01",
+      "customer_id": "cust_1781456739180",
+      "customer_phone": "0977665544",
+      "start_time": "2026-06-14T17:05:39.192Z",
+      "end_time": null,
+      "share_code": "5HPK",
+      "status": "active",
+      "guests_count": 4,
+      "created_by": "mv001"
+    },
+    {
+      "id": "s_B02_4266",
+      "table_id": "B02",
+      "customer_id": "cust_1781454469581",
+      "customer_phone": "0986154977",
+      "start_time": "2026-06-14T16:50:24.266Z",
+      "end_time": "2026-06-14T18:01:36.733Z",
+      "share_code": "RQJG",
+      "status": "completed",
+      "guests_count": 9,
+      "created_by": "mv001"
+    },
+    {
+      "id": "s_B12_0169",
+      "table_id": "B12",
+      "customer_id": "cust_1781455670165",
+      "customer_phone": "0986154976",
+      "start_time": "2026-06-14T16:47:50.169Z",
+      "end_time": "2026-06-14T18:03:33.933Z",
+      "share_code": "TGS5",
+      "status": "completed",
+      "guests_count": 7,
+      "created_by": "mv001"
+    },
+    {
+      "id": "s_B02_9588",
+      "table_id": "B02",
+      "customer_id": "cust_1781454469581",
+      "customer_phone": "0986154977",
+      "start_time": "2026-06-14T16:27:49.588Z",
+      "end_time": "2026-06-14T16:45:04.844Z",
+      "share_code": "CXJJ",
+      "status": "completed",
+      "guests_count": 5,
+      "created_by": "mv002"
+    },
+    {
       "id": "s_B03_4971",
       "table_id": "B03",
       "customer_id": "cust_1781449854968",
       "customer_phone": "0986154978",
       "start_time": "2026-06-14T15:10:54.971Z",
-      "end_time": null,
+      "end_time": "2026-06-14T16:57:39.544Z",
       "share_code": "44W8",
-      "status": "active",
+      "status": "completed",
       "guests_count": 6,
       "created_by": "mv002"
     },
@@ -2222,6 +2334,13 @@
   ],
   "orders": [
     {
+      "id": "o_B04_7260",
+      "session_id": "s_B04",
+      "created_at": "2026-06-14T19:25:57.263Z",
+      "service_status": "Đang chuẩn bị",
+      "total_amount": 2503000
+    },
+    {
       "id": "o_B04_1",
       "session_id": "s_B04",
       "created_at": "2026-06-13T20:06:37.659Z",
@@ -2244,6 +2363,26 @@
     }
   ],
   "order_details": [
+    {
+      "id": "od_1781465157263_0",
+      "order_id": "o_B04_7260",
+      "dish_id": "m02",
+      "quantity": 1,
+      "price_at_time": 1678000,
+      "item_status": "Đang chờ",
+      "notes": "",
+      "ordered_at": "2026-06-14T19:25:57.263Z"
+    },
+    {
+      "id": "od_1781465157263_1",
+      "order_id": "o_B04_7260",
+      "dish_id": "m07",
+      "quantity": 1,
+      "price_at_time": 825000,
+      "item_status": "Đang chờ",
+      "notes": "",
+      "ordered_at": "2026-06-14T19:25:57.263Z"
+    },
     {
       "id": "od_1",
       "order_id": "o_B04_1",
@@ -2373,6 +2512,286 @@
   ],
   "system_logs": [
     {
+      "id": "log_1781469244779_tnlt",
+      "employee_id": "system",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Đặt bàn trước",
+      "created_at": "2026-06-14T20:34:04.779Z",
+      "changed_data": "Tạo lịch đặt bàn cho hahah SĐT 0123456781 nhắm bàn B02 ngày 2026-06-15 lúc 21:00"
+    },
+    {
+      "id": "log_1781468745467_bfz4",
+      "employee_id": "system",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Đặt bàn trước",
+      "created_at": "2026-06-14T20:25:45.467Z",
+      "changed_data": "Tạo lịch đặt bàn cho wr SĐT 0986154912 nhắm bàn B05 ngày 2026-06-16 lúc 21:00"
+    },
+    {
+      "id": "log_1781467940754_eqfn",
+      "employee_id": "mv002",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T20:12:20.754Z",
+      "changed_data": "Kích hoạt bàn B03 cùng SĐT 0986154976 - Khách ngồi: 2 - Mã: PSKN"
+    },
+    {
+      "id": "log_1781466785400_u7rx",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T19:53:05.400Z",
+      "changed_data": "Hoàn tất phiên s_B02_6303 cho bàn B02. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781466323504_ly1s",
+      "employee_id": "system",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Đặt bàn trước",
+      "created_at": "2026-06-14T19:45:23.504Z",
+      "changed_data": "Tạo lịch đặt bàn cho Hà My SĐT 0986154976 nhắm bàn B08 ngày 2026-06-15 lúc 20:45"
+    },
+    {
+      "id": "log_1781465157311_9a21",
+      "employee_id": "guest",
+      "employee_name": "Khách hàng",
+      "action": "Đặt món ăn",
+      "created_at": "2026-06-14T19:25:57.311Z",
+      "changed_data": "Khách bàn B04 gửi đơn o_B04_7260 gồm 2 món. Tạm tính 2,503,000đ"
+    },
+    {
+      "id": "log_1781464314575_i7ss",
+      "employee_id": "system",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Đặt bàn trước",
+      "created_at": "2026-06-14T19:11:54.575Z",
+      "changed_data": "Tạo lịch đặt bàn cho Hà Vy SĐT 0123456789 nhắm bàn B03 ngày 2026-06-16 lúc 01:15"
+    },
+    {
+      "id": "log_1781464163040_bna1",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Đăng nhập hệ thống",
+      "created_at": "2026-06-14T19:09:23.040Z",
+      "changed_data": "Nhân viên đăng nhập với vai trò: Lễ tân"
+    },
+    {
+      "id": "log_1781464066311_d08y",
+      "employee_id": "mv002",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T19:07:46.311Z",
+      "changed_data": "Kích hoạt bàn B02 cùng SĐT 0123456789 - Khách ngồi: 2 - Mã: JOHW"
+    },
+    {
+      "id": "log_1781464033273_vxhw",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T19:07:13.273Z",
+      "changed_data": "Hoàn tất phiên s_B02_6425 cho bàn B02. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781463786433_bkv1",
+      "employee_id": "mv002",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T19:03:06.433Z",
+      "changed_data": "Kích hoạt bàn B02 cùng SĐT 0986154977 - Khách ngồi: 2 - Mã: H08P"
+    },
+    {
+      "id": "log_1781463131612_efee",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Điều hành sơ đồ bàn",
+      "created_at": "2026-06-14T18:52:11.612Z",
+      "changed_data": "Thay đổi trạng thái bàn B02 từ \"trong\" sang \"trong\""
+    },
+    {
+      "id": "log_1781463131605_7o62",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Đổi trạng thái đặt bàn",
+      "created_at": "2026-06-14T18:52:11.605Z",
+      "changed_data": "Lượt đặt bàn B02 của chị Chi chuyển sang \"Đã hủy do quá giờ\""
+    },
+    {
+      "id": "log_1781463126607_zj61",
+      "employee_id": "system",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Đặt bàn trước",
+      "created_at": "2026-06-14T18:52:06.607Z",
+      "changed_data": "Tạo lịch đặt bàn cho chị Chi SĐT 0986154977 nhắm bàn B02 ngày 2026-06-14 lúc 01:51"
+    },
+    {
+      "id": "log_1781463105798_q3en",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Điều hành sơ đồ bàn",
+      "created_at": "2026-06-14T18:51:45.798Z",
+      "changed_data": "Thay đổi trạng thái bàn B02 từ \"trong\" sang \"trong\""
+    },
+    {
+      "id": "log_1781463105792_kg2j",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Đổi trạng thái đặt bàn",
+      "created_at": "2026-06-14T18:51:45.792Z",
+      "changed_data": "Lượt đặt bàn B02 của Chị Chi chuyển sang \"Đã hủy do quá giờ\""
+    },
+    {
+      "id": "log_1781463102103_v9yi",
+      "employee_id": "system",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Đặt bàn trước",
+      "created_at": "2026-06-14T18:51:42.103Z",
+      "changed_data": "Tạo lịch đặt bàn cho Chị Chi SĐT 0986154971 nhắm bàn B02 ngày 2026-06-14 lúc 01:51"
+    },
+    {
+      "id": "log_1781463063375_v1nf",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Điều hành sơ đồ bàn",
+      "created_at": "2026-06-14T18:51:03.375Z",
+      "changed_data": "Thay đổi trạng thái bàn B01 từ \"co_khach\" sang \"trong\""
+    },
+    {
+      "id": "log_1781463063363_2dgu",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Đổi trạng thái đặt bàn",
+      "created_at": "2026-06-14T18:51:03.364Z",
+      "changed_data": "Lượt đặt bàn B01 của Phạm Thanh Hà chuyển sang \"Đã hủy do quá giờ\""
+    },
+    {
+      "id": "log_1781460512217_ii7v",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T18:08:32.217Z",
+      "changed_data": "Hoàn tất phiên s_B03_3197 cho bàn B03. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781460503203_bcob",
+      "employee_id": "mv002",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T18:08:23.203Z",
+      "changed_data": "Kích hoạt bàn B03 cùng SĐT 0986154976 - Khách ngồi: 6 - Mã: 3MEM"
+    },
+    {
+      "id": "log_1781460235448_u18z",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Đăng nhập hệ thống",
+      "created_at": "2026-06-14T18:03:55.448Z",
+      "changed_data": "Nhân viên đăng nhập với vai trò: Lễ tân"
+    },
+    {
+      "id": "log_1781460225342_i2tf",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Đăng xuất hệ thống",
+      "created_at": "2026-06-14T18:03:45.342Z",
+      "changed_data": "Đăng xuất phiên làm việc"
+    },
+    {
+      "id": "log_1781460213940_ur7n",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T18:03:33.940Z",
+      "changed_data": "Hoàn tất phiên s_B12_0169 cho bàn B12. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781460096740_w06v",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T18:01:36.740Z",
+      "changed_data": "Hoàn tất phiên s_B02_4266 cho bàn B02. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781460077427_jrn8",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Đăng nhập hệ thống",
+      "created_at": "2026-06-14T18:01:17.427Z",
+      "changed_data": "Nhân viên đăng nhập với vai trò: Quản lý"
+    },
+    {
+      "id": "log_1781456781159_my1k",
+      "employee_id": "mv002",
+      "employee_name": "Trần Thị B",
+      "action": "Đăng nhập hệ thống",
+      "created_at": "2026-06-14T17:06:21.159Z",
+      "changed_data": "Nhân viên đăng nhập với vai trò: Lễ tân"
+    },
+    {
+      "id": "log_1781456759868_aram",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Đăng xuất hệ thống",
+      "created_at": "2026-06-14T17:05:59.868Z",
+      "changed_data": "Đăng xuất phiên làm việc"
+    },
+    {
+      "id": "log_1781456739197_qu1z",
+      "employee_id": "mv001",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T17:05:39.197Z",
+      "changed_data": "Kích hoạt bàn B01 cùng SĐT 0977665544 - Khách ngồi: 4 - Mã: 5HPK"
+    },
+    {
+      "id": "log_1781456259551_6kmp",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T16:57:39.551Z",
+      "changed_data": "Hoàn tất phiên s_B03_4971 cho bàn B03. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781455824274_p64f",
+      "employee_id": "mv001",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T16:50:24.274Z",
+      "changed_data": "Kích hoạt bàn B02 cùng SĐT 0986154977 - Khách ngồi: 9 - Mã: RQJG"
+    },
+    {
+      "id": "log_1781455670174_06rb",
+      "employee_id": "mv001",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T16:47:50.174Z",
+      "changed_data": "Kích hoạt bàn B12 cùng SĐT 0986154976 - Khách ngồi: 7 - Mã: TGS5"
+    },
+    {
+      "id": "log_1781455504850_h0hx",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Thanh toán & Đóng phiên",
+      "created_at": "2026-06-14T16:45:04.851Z",
+      "changed_data": "Hoàn tất phiên s_B02_9588 cho bàn B02. Bàn trả về trạng thái Trống."
+    },
+    {
+      "id": "log_1781455288011_qdlw",
+      "employee_id": "mv001",
+      "employee_name": "Nguyễn Văn A",
+      "action": "Đăng nhập hệ thống",
+      "created_at": "2026-06-14T16:41:28.011Z",
+      "changed_data": "Nhân viên đăng nhập với vai trò: Quản lý"
+    },
+    {
+      "id": "log_1781454469597_b78y",
+      "employee_id": "mv002",
+      "employee_name": "Nhân viên lễ tân",
+      "action": "Mở phiên đặt bàn",
+      "created_at": "2026-06-14T16:27:49.597Z",
+      "changed_data": "Kích hoạt bàn B02 cùng SĐT 0986154977 - Khách ngồi: 5 - Mã: CXJJ"
+    },
+    {
       "id": "log_1781449854975_ezmu",
       "employee_id": "mv002",
       "employee_name": "Nhân viên lễ tân",
@@ -2415,6 +2834,60 @@
   ],
   "table_reservations": [
     {
+      "id": "db_1781469244773",
+      "table_id": "B02",
+      "customer_name": "hahah",
+      "phone": "0123456781",
+      "reservation_date": "2026-06-15",
+      "reservation_time": "21:00",
+      "status": "Chờ đến"
+    },
+    {
+      "id": "db_1781468745460",
+      "table_id": "B05",
+      "customer_name": "wr",
+      "phone": "0986154912",
+      "reservation_date": "2026-06-16",
+      "reservation_time": "21:00",
+      "status": "Chờ đến"
+    },
+    {
+      "id": "db_1781466323500",
+      "table_id": "B08",
+      "customer_name": "Hà My",
+      "phone": "0986154976",
+      "reservation_date": "2026-06-15",
+      "reservation_time": "20:45",
+      "status": "Chờ đến"
+    },
+    {
+      "id": "db_1781464314570",
+      "table_id": "B03",
+      "customer_name": "Hà Vy",
+      "phone": "0123456789",
+      "reservation_date": "2026-06-16",
+      "reservation_time": "01:15",
+      "status": "Chờ đến"
+    },
+    {
+      "id": "db_1781463126604",
+      "table_id": "B02",
+      "customer_name": "chị Chi",
+      "phone": "0986154977",
+      "reservation_date": "2026-06-14",
+      "reservation_time": "01:51",
+      "status": "Đã hủy do quá giờ"
+    },
+    {
+      "id": "db_1781463102099",
+      "table_id": "B02",
+      "customer_name": "Chị Chi",
+      "phone": "0986154971",
+      "reservation_date": "2026-06-14",
+      "reservation_time": "01:51",
+      "status": "Đã hủy do quá giờ"
+    },
+    {
       "id": "db_01",
       "table_id": "B04",
       "customer_name": "Nguyễn Lâm Hoàng",
@@ -2430,7 +2903,7 @@
       "phone": "0977665544",
       "reservation_date": "2026-06-14",
       "reservation_time": "18:30",
-      "status": "Chờ đến"
+      "status": "Đã hủy do quá giờ"
     }
   ],
   "inventory_transactions": [

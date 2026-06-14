@@ -28,6 +28,7 @@ export interface TableSession {
   status: 'active' | 'completed';
   guests_count: number;
   customer_phone?: string;
+  customer_name?: string;
   created_by?: string | null;
 }
 
@@ -391,6 +392,13 @@ export class Database {
       } catch (e) {
         try {
           await this.pool.query("ALTER TABLE `table_sessions` ADD COLUMN `customer_phone` VARCHAR(20) DEFAULT NULL");
+        } catch (_) {}
+      }
+      try {
+        await this.pool.query("ALTER TABLE `table_sessions` ADD COLUMN IF NOT EXISTS `customer_name` VARCHAR(255) DEFAULT 'Khách vãng lai'");
+      } catch (e) {
+        try {
+          await this.pool.query("ALTER TABLE `table_sessions` ADD COLUMN `customer_name` VARCHAR(255) DEFAULT 'Khách vãng lai'");
         } catch (_) {}
       }
       try {
